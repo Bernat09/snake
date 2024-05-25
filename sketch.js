@@ -8,13 +8,17 @@ let bodyImg;
 let foodImg;
 
 function preload() {
-  headImg = createImg('head.png', 'Head Image', '', () => console.log('head.png loaded'));
-  bodyImg = createImg('body.png', 'Body Image', '', () => console.log('body.png loaded'));
-  foodImg = createImg('food.png', 'Food Image', '', () => console.log('food.png loaded'));
-  
-  headImg.hide();
-  bodyImg.hide();
-  foodImg.hide();
+  headImg = loadImage('head.png', imageLoaded, imageLoadError);
+  bodyImg = loadImage('body.png', imageLoaded, imageLoadError);
+  foodImg = loadImage('food.png', imageLoaded, imageLoadError);
+}
+
+function imageLoaded() {
+  console.log('Image loaded successfully.');
+}
+
+function imageLoadError(err) {
+  console.error('Image failed to load:', err);
 }
 
 function setup() {
@@ -59,7 +63,7 @@ function draw() {
   snake.show();
   
   // Draw the food
-  image(foodImg.elt, food.x, food.y, 1, 1);
+  image(foodImg, food.x, food.y, 1, 1);
 }
 
 class Snake {
@@ -116,9 +120,13 @@ class Snake {
   show() {
     for (let i = 0; i < this.body.length; i++) {
       if (i === this.body.length - 1) {
-        image(headImg.elt, this.body[i].x, this.body[i].y, 1, 1);
+        if (headImg instanceof p5.Image) {
+          image(headImg, this.body[i].x, this.body[i].y, 1, 1);
+        }
       } else {
-        image(bodyImg.elt, this.body[i].x, this.body[i].y, 1, 1);
+        if (bodyImg instanceof p5.Image) {
+          image(bodyImg, this.body[i].x, this.body[i].y, 1, 1);
+        }
       }
     }
   }
