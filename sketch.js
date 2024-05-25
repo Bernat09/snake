@@ -118,15 +118,14 @@ class Snake {
   }
 
   show() {
-    for (let i = 0; i < this.body.length; i++) {
-      if (i === this.body.length - 1) {
-        if (headImg instanceof p5.Image) {
-          image(headImg, this.body[i].x, this.body[i].y, 1, 1);
-        }
-      } else {
-        if (bodyImg instanceof p5.Image) {
-          image(bodyImg, this.body[i].x, this.body[i].y, 1, 1);
-        }
+  for (let i = 0; i < this.body.length; i++) {
+    if (i === this.body.length - 1) {
+      if (headImg instanceof p5.Image) {
+        image(headImg, this.body[i].x, this.body[i].y, 1, 1);
+      }
+    } else {
+      if (bodyImg instanceof p5.Image) {
+        image(bodyImg, this.body[i].x, this.body[i].y, 1, 1);
       }
     }
   }
